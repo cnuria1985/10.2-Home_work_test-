@@ -13,12 +13,13 @@ def filter_by_state(list_of_dictionaries: list[dict], state: str = "EXECUTED") -
 def sort_by_date(list_of_dictionaries: list[dict], reverse: bool = True) -> list[dict]:
     """Функция возвращает список словарей, отсортированный по дате"""
 
-    total_of_dictionary = sorted(list_of_dictionaries, key=lambda x: (datetime.strptime(x["date"], "%d.%m.%Y"), x['name']), reverse=False)
+    total_of_dictionary = sorted(list_of_dictionaries, key=lambda x: (datetime.strptime(x["date"], "%d.%m.%Y"),
+                                                                      x['name']), reverse=False)
     return total_of_dictionary
 
 
 if __name__ == '__main__':
-    print (filter_by_state([
+    print(filter_by_state([
         {'name': 'Сергей', 'date': '27.08.1985'},
         {'name': 'Нурия', 'date': '19.11.1985'},
         {'name': 'Ракета', 'date': '01.03.2020'},
@@ -31,7 +32,8 @@ if __name__ == '__main__':
     #                     {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'},
     #                     {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
     #                     {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}]))
-    print(sort_by_date([{'name': 'Сергей', 'date': '27.08.1985'},
+    print(sort_by_date([
+        {'name': 'Сергей', 'date': '27.08.1985'},
         {'name': 'Нурия', 'date': '19.11.1985'},
         {'name': 'Ракета', 'date': '01.03.2020'},
         {'name': 'Игорь', 'date': '09.06.2010'},
