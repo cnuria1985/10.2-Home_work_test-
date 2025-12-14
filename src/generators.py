@@ -1,4 +1,5 @@
 def filter_by_currency(transactions: list, valute: str):
+    '''поочередно выдает транзакции, где валюта операции соответствует заданной (например, USD)'''
     return(d for d in transactions if d['operationAmount']['currency']['code'] == valute)
 
 transactions = (
@@ -84,3 +85,18 @@ usd_transactions = filter_by_currency(transactions, "USD")
 for _ in range(2):
     print(next(usd_transactions))
 
+
+def transaction_descriptions(trans: list):
+    """принимает список словарей с транзакциями и возвращает описание каждой операции по очереди"""
+    for d in trans:
+        operation = d['description']
+        yield operation
+descriptions = transaction_descriptions(transactions)
+for _ in range(5):
+    print(next(descriptions))
+
+""">>> Перевод организации
+    Перевод со счета на счет
+    Перевод со счета на счет
+    Перевод с карты на карту
+    Перевод организации"""
