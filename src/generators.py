@@ -100,3 +100,29 @@ for _ in range(5):
     Перевод со счета на счет
     Перевод с карты на карту
     Перевод организации"""
+
+
+def card_number_generator(number_first: int, number_last: int):
+    '''принимать начальное и конечное значения для генерации диапазона номеров'''
+
+    # return f"{number_card[0:4]} {number_card[5:9]} {number_card[10:14]} {number_card[-4:]}"
+    card_1 = '0000 0000 0000 0000'
+    # ind = len(card_first)
+    num = number_first
+    number_last_1 = number_last + 1
+    for number in range (number_first, number_last_1):
+        list_cards = []
+        number_card = f"{card_1[0:-1]}{num}"
+        list_cards.append(number_card)
+        num+=1
+        yield number_card
+
+p = card_number_generator
+for card_number in card_number_generator(1, 5):
+    print(card_number)
+
+    '''>>> 0000 0000 0000 0001
+        0000 0000 0000 0002
+        0000 0000 0000 0003
+        0000 0000 0000 0004
+        0000 0000 0000 0005'''
