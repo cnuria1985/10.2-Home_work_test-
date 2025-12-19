@@ -230,3 +230,17 @@ def transactions():
         }
     ]
 )
+
+
+@pytest.fixture
+def transactions_boosh():
+    return ([])
+
+
+@pytest.fixture
+def operations():
+    return ('''Перевод организации
+    Перевод со счета на счет
+    Перевод со счета на счет
+    Перевод с карты на карту
+    Перевод организации''')

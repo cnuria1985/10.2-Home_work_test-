@@ -1,6 +1,6 @@
-def filter_by_currency(transactions: list, valute: str):
+def filter_by_currency(trans: list, valute: str):
     '''поочередно выдает транзакции, где валюта операции соответствует заданной (например, USD)'''
-    return(d for d in transactions if d['operationAmount']['currency']['code'] == valute)
+    return (d for d in transactions if d['operationAmount']['currency']['code'] == valute)
 
 transactions = (
     [
@@ -81,6 +81,7 @@ transactions = (
         }
     ]
 )
+
 usd_transactions = filter_by_currency(transactions, "USD")
 for _ in range(2):
     print(next(usd_transactions))
