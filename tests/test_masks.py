@@ -13,7 +13,7 @@ def test_get_mask_account(true_number_account):
 
 def test_get_mask_card_number_symbols():
     with pytest.raises(ValueError) as exc_info:
-        get_mask_card_number('bh62345017865435')
+        get_mask_card_number("bh62345017865435")
 
     # Проверяем, что сообщение об ошибке соответствует ожидаемому
     assert str(exc_info.value) == "Введите только числовые значения подряд"
@@ -21,7 +21,7 @@ def test_get_mask_card_number_symbols():
 
 def test_get_mask_account_symbols():
     with pytest.raises(ValueError) as exc_info:
-        get_mask_account('bh62345017865435')
+        get_mask_account("bh62345017865435")
 
     # Проверяем, что сообщение об ошибке соответствует ожидаемому
     assert str(exc_info.value) == "Введите только числовые значения подряд"
@@ -29,7 +29,7 @@ def test_get_mask_account_symbols():
 
 def test_get_mask_card_number_count():
     with pytest.raises(ValueError) as exc_info:
-        get_mask_card_number('987450178654399995')
+        get_mask_card_number("987450178654399995")
 
     # Проверяем, что сообщение об ошибке соответствует ожидаемому
     assert str(exc_info.value) == "Неверное количество символов"
@@ -37,8 +37,7 @@ def test_get_mask_card_number_count():
 
 def test_get_mask_account_count():
     with pytest.raises(ValueError) as exc_info:
-        get_mask_card_number('987450178654399995')
+        get_mask_card_number("987450178654399995")
 
     # Проверяем, что сообщение об ошибке соответствует ожидаемому
     assert str(exc_info.value) == "Неверное количество символов"
-

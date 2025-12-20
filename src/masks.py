@@ -1,5 +1,5 @@
 def get_mask_card_number(number_card: str) -> str:
-    """Функция, маскирующая номер карты"""
+    "Функция, маскирующая номер карты"
     if not number_card.isdigit():
         raise ValueError("Введите только числовые значения подряд")
     else:
@@ -9,7 +9,7 @@ def get_mask_card_number(number_card: str) -> str:
 
 
 def get_mask_account(number_account: str) -> str:
-    """Функция, маскирующая номер счёта"""
+    "Функция, маскирующая номер счёта"
     if not number_account.isdigit():
         raise ValueError("Введите только числовые значения подряд")
     else:
@@ -19,5 +19,5 @@ def get_mask_account(number_account: str) -> str:
 
 
 if __name__ == "__main__":
-    print(get_mask_card_number(str('2202345017865438')))
-    print(get_mask_account(str('123234501786543')))
+    print(get_mask_card_number(str("2202345017865438")))
+    print(get_mask_account(str("123234501786543")))
