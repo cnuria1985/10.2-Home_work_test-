@@ -1,3 +1,6 @@
+from typing import AnyStr
+
+
 def filter_by_currency(trans: list, valute: str):
     "поочередно выдает транзакции, где валюта операции соответствует заданной (например, USD)"
     return (d for d in trans if d["operationAmount"]["currency"]["code"] == valute)
@@ -52,9 +55,9 @@ transactions = [
 ]
 
 
-# usd_transactions = filter_by_currency(transactions, "USD")
-# for _ in range(2):
-#     print(next(usd_transactions))
+usd_transactions = filter_by_currency(transactions, "USD")
+for item in usd_transactions:
+    print(item)
 
 
 def transaction_descriptions(trans: list):
@@ -64,9 +67,9 @@ def transaction_descriptions(trans: list):
         yield operation
 
 
-# descriptions = transaction_descriptions(transactions)
-# for _ in range(5):
-#     print(next(descriptions))
+descriptions = transaction_descriptions(transactions)
+for item in transactions:
+    print(next(descriptions))
 
 """>>> Перевод организации
     Перевод со счета на счет
