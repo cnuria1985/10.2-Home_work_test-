@@ -80,32 +80,19 @@ for item in transactions:
 def card_number_generator(number_first: int, number_last: int):
     """принимать начальное и конечное значения для генерации диапазона номеров"""
 
-    # return f"{number_card[0:4]} {number_card[5:9]} {number_card[10:14]} {number_card[-4:]}"
-    card_1 = "0000 0000 0000 0000"
-    # ind = len(card_first)
-    num = number_first
     number_last_1 = number_last + 1
     for number in range(number_first, number_last_1):
-        list_cards = []
-        number_card = f"{card_1[0:-1]}{num}"
-        list_cards.append(number_card)
-        num += 1
-        yield number_card
+        count_zero = 16 - len(str(number))
+        number_card = "0" * count_zero + str(number)
+        total_number_card = f"{number_card[:4]} {number_card[4:8]} {number_card[8:12]} {number_card[12:]}"
+        yield total_number_card
 
-    # p = card_number_generator
-    # for card_number in card_number_generator(1, 5):
-    #     print(card_number)
+generator = card_number_generator(9999999999999980, 9999999999999990)
+for i in generator:
+    print(i)
 
-    """>>> 0000 0000 0000 0001
-        0000 0000 0000 0002
-        0000 0000 0000 0003
-        0000 0000 0000 0004
-        0000 0000 0000 0005"""
 
-generator = card_number_generator(10000, 9999999999999990)
-for _ in range(1, 10):
-    print(next(generator))
-# if __name__ == "__main__":
-#     print(filter_by_currency(transactions, "USD"))
-#     print(transaction_descriptions(transactions))
-#     print(card_number_generator(1, 5))
+if __name__ == "__main__":
+    print(filter_by_currency(transactions, "USD"))
+    print(transaction_descriptions(transactions))
+    print(card_number_generator(1, 5))
