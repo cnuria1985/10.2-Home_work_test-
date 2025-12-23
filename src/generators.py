@@ -1,8 +1,8 @@
-from typing import AnyStr
+from typing import Generator
 
 
-def filter_by_currency(trans: list, valute: str):
-    "поочередно выдает транзакции, где валюта операции соответствует заданной (например, USD)"
+def filter_by_currency(trans: list, valute: str) -> Generator:
+    """поочередно выдает транзакции, где валюта операции соответствует заданной (например, USD)"""
     return (d for d in trans if d["operationAmount"]["currency"]["code"] == valute)
 
 
@@ -54,14 +54,13 @@ transactions = [
     },
 ]
 
-
 usd_transactions = filter_by_currency(transactions, "USD")
 for item in usd_transactions:
     print(item)
 
 
 def transaction_descriptions(trans: list):
-    "принимает список словарей с транзакциями и возвращает описание каждой операции по очереди"
+    """принимает список словарей с транзакциями и возвращает описание каждой операции по очереди"""
     for d in trans:
         operation = d["description"]
         yield operation
@@ -79,7 +78,7 @@ for item in transactions:
 
 
 def card_number_generator(number_first: int, number_last: int):
-    "принимать начальное и конечное значения для генерации диапазона номеров"
+    """принимать начальное и конечное значения для генерации диапазона номеров"""
 
     # return f"{number_card[0:4]} {number_card[5:9]} {number_card[10:14]} {number_card[-4:]}"
     card_1 = "0000 0000 0000 0000"
@@ -103,8 +102,10 @@ def card_number_generator(number_first: int, number_last: int):
         0000 0000 0000 0004
         0000 0000 0000 0005"""
 
-
-if __name__ == "__main__":
-    print(filter_by_currency(transactions, "USD"))
-    print(transaction_descriptions(transactions))
-    print(card_number_generator(1, 5))
+generator = card_number_generator(10000, 9999999999999990)
+for _ in range(1, 10):
+    print(next(generator))
+# if __name__ == "__main__":
+#     print(filter_by_currency(transactions, "USD"))
+#     print(transaction_descriptions(transactions))
+#     print(card_number_generator(1, 5))
