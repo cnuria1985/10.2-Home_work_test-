@@ -18,6 +18,6 @@ def get_mask_account(number_account: str) -> str:
     return f"**{number_account[-4:]}"
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     print(get_mask_card_number(str("2202345017865438")))
     print(get_mask_account(str("123234501786543")))

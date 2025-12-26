@@ -19,7 +19,7 @@ def sort_by_date(list_of_dictionaries: list[dict], reverse: bool = True) -> list
     return total_of_dictionary
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     print(
         filter_by_state(
             [

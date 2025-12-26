@@ -21,7 +21,7 @@ def get_date(date_init: str) -> str:
     return use_date
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     print(mask_account_card(str("Visa Gold 5999414228426353")))
     print(mask_account_card(str("Счет 73654108430135874305")))
     print(get_date(str("2024-03-11T02:26:18.671407")))
