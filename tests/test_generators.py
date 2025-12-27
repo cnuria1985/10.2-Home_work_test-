@@ -35,8 +35,14 @@ def test_transaction_descriptions_no_operations(transactions_no_operations):
 
 def test_transaction_descriptions_boosh(transactions_boosh):
     # Проверяем реакцию на пустой список
-    result = []
+    result = list(transaction_descriptions(transactions_boosh))
     assert result == []
+
+
+def test_transaction_descriptions_no_two_operations(transactions_no_two_operations):
+    # Проверяем реакцию на пустой список
+    result = list(transaction_descriptions(transactions_no_two_operations))
+    assert result == "Отсутствует ключ 'description'"
 
 
 def test_card_number_generator():

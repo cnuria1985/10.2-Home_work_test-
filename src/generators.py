@@ -13,7 +13,7 @@ def transaction_descriptions(trans: list):
             operation = d["description"]
             yield operation
         else:
-            return []
+            yield "Отсутствует ключ 'description'"
 
 
 def card_number_generator(number_first: int, number_last: int):
