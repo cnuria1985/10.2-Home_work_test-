@@ -1,6 +1,8 @@
 import pytest
+
 #from src.decorators import log, decorator, wrapper, my_function
 
+# тест на вывод сообщения при ошибке
 
 def test_log(capsys):
     with pytest.raises(Exception, match=f"{func.__name__} error: {e}. Inputs: {args} {kwargs}"):

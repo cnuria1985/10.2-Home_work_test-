@@ -1,6 +1,6 @@
-from time import time
+
 from functools import wraps
-import logging
+
 
 def log(filename=None):
      def decorator(func):
