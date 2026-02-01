@@ -1,0 +1,11 @@
+2026-01-15 10:26:37,198 my_function ok
+2026-01-15 19:14:07,722 my_function ok
+2026-01-16 21:15:26,729 my_function error: Value must be integer!. Inputs: (1, 2), {}
+2026-01-16 21:17:01,082 my_function error: Value must be integer!. Inputs: (1, 2), {}
+2026-01-16 21:26:58,464 my_function error: Value must be integer!. Inputs: (1, 2), {}
+2026-01-28 11:21:47,425 my_function error: Value must be integer!. Inputs: (1, 2), {}
+2026-01-28 11:31:06,795 my_function error: Value must be integer!. Inputs: (1, 2), {}
+2026-01-28 11:31:16,863 my_function error: Value must be integer!. Inputs: (1, 2), {}
+my_function ok
+my_function error: can only concatenate str (not "int") to str. Inputs: ('1', 2) {}
+my_function error: can only concatenate str (not "int") to str. Inputs: ('1', 2) {}
