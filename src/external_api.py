@@ -1,8 +1,30 @@
+
 import json
+import os
+from dotenv import load_dotenv
 import requests
 
+# Загрузка переменных из .env-файла
+load_dotenv()
+
+# Получение значения переменной GITHUB_TOKEN из .env-файла
+#github_token = os.getenv('GITHUB_TOKEN')
+
+# Создание заголовка с токеном доступа API
+# headers = {
+#     'Authorization': f'token {github_token}'
+# }
+
+# Отправка GET-запроса к API
+#API = requests.get('https://api.github.com/user', headers=headers)
+
+# Получение API_KEY
+
+API_true = os.getenv('API_KEY')
 
 def get_convert(transaction):
+    """Функция, которая принимает на вход транзакцию и возвращает сумму транзакции в рублях"""
+
     if transaction['operationAmount']['currency']['name'] == 'RUB':
         amount_convert = transaction['operationAmount']['amount']
     elif transaction['operationAmount']['currency']['name'] in ['USD', 'EUR']:
@@ -22,7 +44,7 @@ def get_exchange_rate(base, symbols):
          "to": symbols
     }
     url = f"https://api.apilayer.com/exchangerates_data/convert?to={symbols}&from={base}"
-    headers = {"apikey": "FzJa4aIyB2AB1nMfZqOH5QmChcUw4aSX"}
+    headers = {"apikey": API_true}
     response = requests.get(url, headers=headers, params=payload)
     result = response.json()
     amount = result['result']
@@ -37,8 +59,8 @@ if __name__ == "__main__":
         "operationAmount": {
             "amount": "8221.37",
             "currency": {
-                "name": "RUB",
-                "code": "RUB"
+                "name": "USD",
+                "code": "USD"
             }
         },
         "description": "Перевод организации",
