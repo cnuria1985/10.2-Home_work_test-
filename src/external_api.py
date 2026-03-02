@@ -1,36 +1,32 @@
-
+import json
 import requests
 
-API_KEY = 'FzJa4aIyB2AB1nMfZqOH5QmChcUw4aSX'
-headers = {'apikey': API_KEY}
-
-response = requests.get('https://api.apilayer.com/exchangerates_data/live?base=USD,EUR&symbols=RUB', headers=headers)
 
 def get_convert(transaction):
     if transaction['operationAmount']['currency']['name'] == 'RUB':
-        amount_convert = transaction['operationAmount']['currency']['name']
-
-    elif transaction['operationAmount']['currency']['name'] == ('USD', 'EUR'):
-        amount_convert = response.json()
+        amount_convert = transaction['operationAmount']['amount']
+    elif transaction['operationAmount']['currency']['name'] in ['USD', 'EUR']:
+        # Get the exchange rate data for the transaction currency to RUB
+        base = transaction['operationAmount']['currency']['name']
+        symbols = 'RUB'
+        amount_convert = get_exchange_rate(base, symbols)
     else:
         raise NameError("Not USD, not EUR")
-
     return amount_convert
 
-# payload = {
-#     "amount": "1200",
-#     "from": "EUR",
-#     "to": "USD"
-# }
-# headers = {
-#     "apikey": "FzJa4aIyB2AB1nMfZqOH5QmChcUw4aSX"
-# }
-#
-# response = requests.get(url, headers=headers, params=payload)
 
-# result = response.json()
-
-# print(result)
+def get_exchange_rate(base, symbols):
+    payload = {
+         "amount": transaction['operationAmount']['amount'],
+         "from": base,
+         "to": symbols
+    }
+    url = f"https://api.apilayer.com/exchangerates_data/convert?to={symbols}&from={base}"
+    headers = {"apikey": "FzJa4aIyB2AB1nMfZqOH5QmChcUw4aSX"}
+    response = requests.get(url, headers=headers, params=payload)
+    result = response.json()
+    amount = result['result']
+    return amount
 
 
 if __name__ == "__main__":
@@ -41,8 +37,8 @@ if __name__ == "__main__":
         "operationAmount": {
             "amount": "8221.37",
             "currency": {
-                "name": "USD",
-                "code": "USD"
+                "name": "RUB",
+                "code": "RUB"
             }
         },
         "description": "Перевод организации",
