@@ -1,5 +1,6 @@
 # pytest tests/test_external_api.py
-import json
+
+from unittest.mock import Mock
 from unittest.mock import patch
 from src.external_api import get_convert, get_exchange_rate
 
@@ -20,11 +21,37 @@ transaction = {
     }
 
 
-def test_get_convert_with():
-    with patch('requests.get') as mock_get:
-        mock_get.return_value.json.return_value = 8221.37
-        assert get_convert(transaction) == 8221.37
-        mock_get.assert_called_once_with('https://apilayer.com/exchangerates_data-api'), {base}, {symbols}
+# def test_get_exchange_rate():
+#
+#     amount_convert = mock_random
+#     assert get_exchange_rate() == 'USD'
+#     mock_random.assert_called_once_with(transaction)
+#'amount_convert'
+            # @patch('requests.get')
+            # def test_get_exchange_rate(mock_get):
+            #     mock_get.return_value.json.return_value = {'amount_convert': 8221.37}
+            #     assert get_exchange_rate(8221.37) == {'amount_convert': 8221.37}
+            #     mock_get.assert_called_once_with('https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=RUB')
+        # mock_get.return_value.json.return_value = 8221.37
+        # assert get_convert(transaction) == 8221.37
+        # mock_get.assert_called_once_with('https://apilayer.com/exchangerates_data-api'), {base}, {symbols}
+
+@patch('src.external_api.get_exchange_rate')
+@patch('src.external_api.get_convert')
+def test_get_exchange_rate(mock_get_usd, mock_get_rub):
+    mock_get_usd.return_value = (True, {'login': 'user1', 'public_repos': 2})
+    mock_get_rub.return_value = (True, ['repo1', 'repo2'])
+    expected_result = [{'login': 'user1', 'public_repos': 2, 'repositories': ['repo1', 'repo2']}]
+    result = get_github_users(['user1'])
+    assert result == json.dumps(expected_result)
+
+@patch('src.github.get_user_info')
+@patch('src.github.get_user_repos')
+def test_get_github_users_negative(mock_get_user_repos, mock_get_user_info):
+    mock_get_user_info.return_value = (False, {})
+    mock_get_user_repos.return_value = (False, [])
+    result = get_github_users(['non_existent_user'])
+    assert result == None
 
 # @patch('src.github.requests.get')
 # def test_get_user_info(mocked_get):

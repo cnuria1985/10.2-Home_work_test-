@@ -1,4 +1,3 @@
-
 import json
 import os
 from dotenv import load_dotenv
@@ -8,7 +7,7 @@ import requests
 load_dotenv()
 
 # Получение значения переменной GITHUB_TOKEN из .env-файла
-#github_token = os.getenv('GITHUB_TOKEN')
+# github_token = os.getenv('GITHUB_TOKEN')
 
 # Создание заголовка с токеном доступа API
 # headers = {
@@ -16,13 +15,14 @@ load_dotenv()
 # }
 
 # Отправка GET-запроса к API
-#API = requests.get('https://api.github.com/user', headers=headers)
+# API = requests.get('https://api.github.com/user', headers=headers)
 
 # Получение API_KEY
 
 API_true = os.getenv('API_KEY')
 
-def get_convert(transaction):
+
+def get_exchange_rate(transaction):
     """Функция, которая принимает на вход транзакцию и возвращает сумму транзакции в рублях"""
 
     if transaction['operationAmount']['currency']['name'] == 'RUB':
@@ -31,17 +31,20 @@ def get_convert(transaction):
         # Get the exchange rate data for the transaction currency to RUB
         base = transaction['operationAmount']['currency']['name']
         symbols = 'RUB'
-        amount_convert = get_exchange_rate(base, symbols)
+        amount_convert = get_convert(base, symbols)
     else:
         raise NameError("Not USD, not EUR")
     return amount_convert
 
 
-def get_exchange_rate(base, symbols):
+def get_convert(base, symbols):
+    """Функция конвертации суммы в иностранной валюте в рубли с помощью сайта
+        https://apilayer.com/marketplace/exchangerates_data-api"""
+
     payload = {
-         "amount": transaction['operationAmount']['amount'],
-         "from": base,
-         "to": symbols
+        "amount": transaction['operationAmount']['amount'],
+        "from": base,
+        "to": symbols
     }
     url = f"https://api.apilayer.com/exchangerates_data/convert?to={symbols}&from={base}"
     headers = {"apikey": API_true}
@@ -59,12 +62,12 @@ if __name__ == "__main__":
         "operationAmount": {
             "amount": "8221.37",
             "currency": {
-                "name": "USD",
-                "code": "USD"
+                "name": "RUB",
+                "code": "RUB"
             }
         },
         "description": "Перевод организации",
         "from": "MasterCard 7158300734726758",
         "to": "Счет 35383033474447895560"
-   }
-    print(get_convert(transaction))
+    }
+    print(get_exchange_rate(transaction))
